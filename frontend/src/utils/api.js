@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-const api = axios.create({ baseURL: '/api', timeout: 15000 });
+const api = axios.create({
+  baseURL: process.env.REACT_APP_API_URL || '/api',
+  timeout: 15000,
+});
 
 export const searchCity  = (q)                      => api.get(`/air-quality/search?q=${encodeURIComponent(q)}`);
 export const fetchAirQuality = (lat, lon, city, country) =>

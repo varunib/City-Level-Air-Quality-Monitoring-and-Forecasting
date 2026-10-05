@@ -1,72 +1,50 @@
 # City-Level Air Quality Monitoring & Forecasting
 
-A full-stack application for exploring real-time air quality, pollutant levels, and forecasts for cities around the world. The React dashboard is backed by a Node.js/Express API and Open-Meteo's air-quality and geocoding services.
-
-## Features
-
-- Search for cities or choose a preconfigured city from the dashboard.
-- View current US and European AQI, pollutant measurements, and health guidance.
-- Explore hourly and five-day forecasts with interactive charts.
-- Use browser geolocation to look up nearby air quality.
-- Automatically refresh dashboard data every ten minutes.
-- Protect and cache API requests with Express middleware and NodeCache.
-
-## Technology
-
-- **Frontend:** React 18, Recharts, Axios, Framer Motion
-- **Backend:** Node.js, Express, Axios
-- **Data:** Open-Meteo Air Quality and Geocoding APIs (no API key required)
+Full-stack air-quality monitoring and forecasting application. The React frontend uses the existing Express API and Open-Meteo's air-quality and geocoding services.
 
 ## Project structure
 
-The runnable application is in `city-air-quality-monitoring/`:
-
 ```text
-city-air-quality-monitoring/
-├── backend/
-│   ├── src/
-│   │   ├── routes/
-│   │   ├── services/
-│   │   └── utils/
-│   └── package.json
-├── frontend/
-│   ├── public/
-│   ├── src/
-│   └── package.json
+.
+├── frontend/   # Existing React application
+├── backend/    # Existing Node.js/Express API
 ├── package.json
 └── README.md
 ```
 
-## Requirements
+## Run locally
 
-- Node.js 16 or newer
-- npm 8 or newer
+Requirements: Node.js 16 or newer and npm 8 or newer.
 
-## Run the app
-
-From the repository root, run:
+From the repository root:
 
 ```bash
-cd city-air-quality-monitoring
 npm install
 npm run install:all
 npm start
 ```
 
-The frontend is served at [http://localhost:3000](http://localhost:3000) and the backend API at [http://localhost:5000](http://localhost:5000). The frontend development server proxies `/api` requests to the backend.
+The React app runs at [http://localhost:3000](http://localhost:3000); the Express API runs at [http://localhost:5000](http://localhost:5000). In development, React proxies `/api` requests to the backend.
 
-To start the services separately, run these commands from `city-air-quality-monitoring/` in separate terminals:
+To run the services separately, use two terminals from the repository root:
 
 ```bash
 npm run dev:backend
 npm run start:frontend
 ```
 
-To create a production frontend build:
+Create a production frontend build with:
 
 ```bash
 npm run build
 ```
+
+## Deploy frontend and backend separately
+
+- Deploy `backend/` as the backend service (for example, Render). Set `PORT` as required by the host and `FRONTEND_ORIGINS` to the deployed frontend origin, such as `https://your-app.vercel.app`.
+- Deploy `frontend/` as a Create React App site (for example, Vercel). Set the build-time environment variable `REACT_APP_API_URL` to the backend API base URL, including `/api`, such as `https://your-api.onrender.com/api`.
+
+`REACT_APP_API_URL` is optional locally; when unset, the frontend uses `/api` and the existing development proxy.
 
 ## API endpoints
 
@@ -76,7 +54,3 @@ npm run build
 | `GET` | `/api/geocode?q={city}` | Find city coordinates |
 | `GET` | `/api/air-quality/search?q={city}` | Search for a city |
 | `GET` | `/api/air-quality?lat={lat}&lon={lon}&city={city}&country={country}` | Current conditions and forecasts |
-
-## License
-
-No license has been specified for this repository.
