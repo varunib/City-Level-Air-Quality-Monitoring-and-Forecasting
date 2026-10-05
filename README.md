@@ -1,161 +1,82 @@
-# 🌍 City-Level Air Quality Monitoring & Forecasting
+# City-Level Air Quality Monitoring & Forecasting
 
-## 📌 Overview
+A full-stack application for exploring real-time air quality, pollutant levels, and forecasts for cities around the world. The React dashboard is backed by a Node.js/Express API and Open-Meteo's air-quality and geocoding services.
 
-City-Level Air Quality Monitoring & Forecasting is a backend application that provides air quality information and forecasting for cities using external air quality and geocoding APIs.
+## Features
 
-The system fetches location data, retrieves air quality metrics, processes the information, and exposes it through REST APIs for integration with web or mobile applications.
+- Search for cities or choose a preconfigured city from the dashboard.
+- View current US and European AQI, pollutant measurements, and health guidance.
+- Explore hourly and five-day forecasts with interactive charts.
+- Use browser geolocation to look up nearby air quality.
+- Automatically refresh dashboard data every ten minutes.
+- Protect and cache API requests with Express middleware and NodeCache.
 
----
+## Technology
 
-## 🚀 Features
+- **Frontend:** React 18, Recharts, Axios, Framer Motion
+- **Backend:** Node.js, Express, Axios
+- **Data:** Open-Meteo Air Quality and Geocoding APIs (no API key required)
 
-* Real-time Air Quality Monitoring
-* City-based Air Quality Search
-* Air Quality Forecasting
-* RESTful API Architecture
-* Response Caching for Better Performance
-* Rate Limiting for API Protection
-* Secure Backend using Helmet
-* Environment Variable Configuration
-* Error Handling and Logging
+## Project structure
 
----
-
-## 🛠️ Tech Stack
-
-### Backend
-
-* Node.js
-* Express.js
-
-### APIs
-
-* Open-Meteo Air Quality API
-* Open-Meteo Geocoding API
-
-### Libraries
-
-* Axios
-* CORS
-* Helmet
-* Morgan
-* Express Rate Limit
-* Node Cache
-* Dotenv
-
-### Tools
-
-* Git
-* GitHub
-* VS Code
-* Nodemon
-
----
-
-## 📂 Project Structure
+The runnable application is in `city-air-quality-monitoring/`:
 
 ```text
 city-air-quality-monitoring/
-│
-├── src/
-│   ├── server.js
-│   ├── routes/
-│   ├── controllers/
-│   ├── services/
-│
-├── .env
+├── backend/
+│   ├── src/
+│   │   ├── routes/
+│   │   ├── services/
+│   │   └── utils/
+│   └── package.json
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   └── package.json
 ├── package.json
-├── package-lock.json
 └── README.md
 ```
 
----
+## Requirements
 
-## ⚙️ Installation
+- Node.js 16 or newer
+- npm 8 or newer
 
-### Clone Repository
+## Run the app
 
-```bash
-git clone https://github.com/varunib/City-Level-Air-Quality-Monitoring-and-Forecasting.git
-```
-
-### Navigate to Project
+From the repository root, run:
 
 ```bash
-cd City-Level-Air-Quality-Monitoring-and-Forecasting
-```
-
-### Install Dependencies
-
-```bash
+cd city-air-quality-monitoring
 npm install
-```
-
-### Configure Environment Variables
-
-Create a `.env` file:
-
-```env
-PORT=5000
-NODE_ENV=development
-CACHE_TTL_SECONDS=600
-RATE_LIMIT_WINDOW_MS=900000
-RATE_LIMIT_MAX=100
-```
-
-### Run Development Server
-
-```bash
-npm run dev
-```
-
-### Run Production Server
-
-```bash
+npm run install:all
 npm start
 ```
 
----
+The frontend is served at [http://localhost:3000](http://localhost:3000) and the backend API at [http://localhost:5000](http://localhost:5000). The frontend development server proxies `/api` requests to the backend.
 
-## 📊 API Capabilities
+To start the services separately, run these commands from `city-air-quality-monitoring/` in separate terminals:
 
-* Search city locations
-* Retrieve air quality data
-* Monitor pollution indicators
-* Forecast air quality trends
-* Provide AQI-related insights
+```bash
+npm run dev:backend
+npm run start:frontend
+```
 
----
+To create a production frontend build:
 
-## 🔒 Security Features
+```bash
+npm run build
+```
 
-* Helmet for HTTP security headers
-* Rate limiting to prevent abuse
-* Environment variable protection
-* Cached API responses for efficiency
+## API endpoints
 
----
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `GET` | `/api/health` | Backend health check |
+| `GET` | `/api/geocode?q={city}` | Find city coordinates |
+| `GET` | `/api/air-quality/search?q={city}` | Search for a city |
+| `GET` | `/api/air-quality?lat={lat}&lon={lon}&city={city}&country={country}` | Current conditions and forecasts |
 
-## 🌱 Future Enhancements
+## License
 
-* Machine Learning-based AQI Prediction
-* Interactive Dashboard
-* Historical AQI Analysis
-* Multi-City Comparison
-* Data Visualization Charts
-* Weather and Pollution Correlation Analysis
-
----
-
-## 👩‍💻 Author
-
-**Varuni Bennur**
-
-GitHub: https://github.com/varunib
-
----
-
-## ⭐ Support
-
-If you found this project useful, please consider giving it a ⭐ on GitHub.
+No license has been specified for this repository.
