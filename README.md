@@ -42,9 +42,9 @@ npm run build
 ## Deploy frontend and backend separately
 
 - Deploy `backend/` as the backend service (for example, Render). Set `PORT` as required by the host and `FRONTEND_ORIGINS` to the deployed frontend origin, such as `https://your-app.vercel.app`.
-- Deploy `frontend/` as a Create React App site (for example, Vercel). Set the build-time environment variable `REACT_APP_API_URL` to the backend API base URL, including `/api`, such as `https://your-api.onrender.com/api`.
+- Deploy `frontend/` as a Create React App site (for example, Vercel). Set the build-time environment variable `REACT_APP_API_URL` to the backend origin, such as `https://your-api.onrender.com`. The frontend adds `/api` to the configured origin.
 
-`REACT_APP_API_URL` is optional locally; when unset, the frontend uses `/api` and the existing development proxy.
+For direct local API requests, set `REACT_APP_API_URL=http://localhost:5000` in `frontend/.env.local`. A template is provided in `frontend/.env.example`. If the variable is unset, the frontend uses `/api` and the existing development proxy.
 
 ## API endpoints
 

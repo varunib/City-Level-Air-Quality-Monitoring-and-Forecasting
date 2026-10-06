@@ -1,7 +1,11 @@
 import axios from 'axios';
 
+const configuredApiUrl = (process.env.REACT_APP_API_URL || '')
+  .replace(/\/+$/, '')
+  .replace(/\/api$/i, '');
+
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || '/api',
+  baseURL: configuredApiUrl ? `${configuredApiUrl}/api` : '/api',
   timeout: 15000,
 });
 
