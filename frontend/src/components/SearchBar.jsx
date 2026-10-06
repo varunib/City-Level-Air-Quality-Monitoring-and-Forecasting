@@ -65,7 +65,7 @@ export default function SearchBar({ onCitySelect }) {
 
   return (
     <div style={s.section}>
-      <div style={s.label}>// ENTER CITY TO MONITOR</div>
+      <div style={s.label}>{'// ENTER CITY TO MONITOR'}</div>
       <div style={s.row}>
         <div style={s.wrap} ref={wrapRef}>
           <div style={s.box}>

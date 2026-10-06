@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import Header        from './components/Header';
 import SearchBar     from './components/SearchBar';
 import WelcomeScreen from './components/WelcomeScreen';
@@ -8,10 +8,7 @@ import { useAirQuality } from './hooks/useAirQuality';
 
 export default function App() {
   const { data, loading, error, load } = useAirQuality();
-  const [selectedCity, setSelectedCity] = useState(null);
-
   const handleCitySelect = useCallback((city) => {
-    setSelectedCity(city);
     load(city.latitude, city.longitude, city.name, city.country);
   }, [load]);
 
